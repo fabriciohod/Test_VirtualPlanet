@@ -15,17 +15,14 @@ public class IngredientsPreview : MonoBehaviour
         {
             Icon instance = Instantiate(iconPrefab, iconsPanel);
             instance.SetIcon(so.recipe[i].icon);
-
         }
     }
 
     public void ClearRecipe()
     {
         for (int i = 0; i < iconsPanel.childCount; i++)
-        {
             iconsPanel.GetChild(i).DOScale(Vector3.zero, .4f)
                 .SetEase(Ease.OutElastic)
                 .OnComplete(() => Destroy(iconsPanel.GetChild(i)));
-        }
     }
 }
