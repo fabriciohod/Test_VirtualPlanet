@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 1
+  <icon>k__BackingField: {fileID: 21300000, guid: 3dbf9fb071c955641a3d961e1b60a282,
+    type: 3}
+  physics: {fileID: 2319746852782859123}
 --- !u!1001 &8379514163305157354
 PrefabInstance:
   m_ObjectHideFlags: 0

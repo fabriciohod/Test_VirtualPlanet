@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 6
+  <icon>k__BackingField: {fileID: 21300000, guid: 30bcccc2e942f234baeeb4478099c6bb,
+    type: 3}
+  physics: {fileID: 403254548227255179}
 --- !u!1 &8859241212612699572
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,13 @@ using DG.Tweening;
 public class Ingredient : MonoBehaviour
 {
     [field: SerializeField] public int ID { get; private set; }
+    [field: SerializeField] public Sprite icon { get; private set; }
+    [SerializeField] Rigidbody physics;
+
+    void OnEnable() => GameManager.OnClearTable += FlayAway;
+
+    void OnDisable() => GameManager.OnClearTable -= FlayAway;
+
 
     IEnumerator Start()
     {
@@ -14,4 +21,13 @@ public class Ingredient : MonoBehaviour
 
         transform.DOScale(Vector3.one, .2f).SetEase(Ease.InBounce);
     }
+
+    public void FlayAway()
+    {
+        physics.AddExplosionForce(5f, Vector3.forward * 4, 20f, 10f, ForceMode.Impulse);
+        transform.DOScale(Vector3.zero, .6f).SetEase(Ease.OutBounce).OnComplete(() => DestroyImmediate(gameObject));
+    }
+
+    public static bool operator ==(Ingredient a, Ingredient b) => a.ID == b.ID;
+    public static bool operator !=(Ingredient a, Ingredient b) => a.ID != b.ID;
 }
