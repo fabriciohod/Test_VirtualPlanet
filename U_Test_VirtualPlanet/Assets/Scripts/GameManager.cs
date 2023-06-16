@@ -8,13 +8,17 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public static event Action OnClearTable;
     public static event Action OnDelivery;
+    public static event Action<RecipesSO> OnReceiveOrder;
+    public List<Ingredient> sandwich { get; private set; } = new List<Ingredient>();
     public static event Action<int> OnScoreChange;
     [field: SerializeField] public Transform SpawnPoint { get; private set; }
-    [field: SerializeField] public int score { get; private set; }
     [SerializeField] Timer gameTimer;
-    [SerializeField] RecipesSO recipe;
     [SerializeField] IngredientsPreview previewScreen;
-    public List<Ingredient> sandwich { get; private set; } = new List<Ingredient>();
+    [SerializeField] Client clientPrefab;
+    [SerializeField] Transform clientSpawnPoint;
+
+    RecipesSO recipe;
+    int score;
 
     void Awake()
     {
@@ -26,11 +30,14 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        previewScreen.ShowRecipe(recipe);
         yield return new WaitForSeconds(2f);
 
         gameTimer.StartTimer();
     }
+
+    void OnEnable() => Client.OnBackHome += NextClient;
+
+    void OnDisable() => Client.OnBackHome -= NextClient;
 
     public void ClearTable()
     {
@@ -48,5 +55,18 @@ public class GameManager : MonoBehaviour
 
         score += 50;
         OnScoreChange?.Invoke(score);
+    }
+
+    public void ReceiveOrder(RecipesSO order)
+    {
+        recipe = order;
+        OnReceiveOrder?.Invoke(order);
+    }
+
+    public void NextClient()
+    {
+        if (clientSpawnPoint == null)
+            return;
+        Instantiate(clientPrefab, clientSpawnPoint.position, Quaternion.identity);
     }
 }
