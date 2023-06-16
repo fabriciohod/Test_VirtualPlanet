@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Receipe 7
   m_EditorClassIdentifier: 
   recipe:
-  - {fileID: 1082310356455141367, guid: 64f0ec9fd50b96641991a1ff74f3b759, type: 3}
+  - {fileID: 2800820199315004455, guid: ea32d17d29d5a354ebbfdb3b59b34a00, type: 3}
+  - {fileID: -3560566833101609845, guid: fe177ddf0ff63d34fb78b7abd9156ff5, type: 3}
+  - {fileID: 7664424159447977224, guid: 7ac570047b58a944da5812b3b1d7e315, type: 3}
+  - {fileID: 2800820199315004455, guid: ea32d17d29d5a354ebbfdb3b59b34a00, type: 3}
