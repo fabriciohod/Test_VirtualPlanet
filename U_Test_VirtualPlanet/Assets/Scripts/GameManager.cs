@@ -6,6 +6,8 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public int Score { get; private set; }
+    public int Total { get; private set; }
     public static event Action OnClearTable;
     public static event Action OnDelivery;
     public static event Action<RecipesSO> OnReceiveOrder;
@@ -18,7 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform clientSpawnPoint;
 
     RecipesSO recipe;
-    int score;
 
     void Awake()
     {
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        Time.timeScale = 1;
+
         yield return new WaitForSeconds(2f);
 
         gameTimer.StartTimer();
@@ -53,8 +56,9 @@ public class GameManager : MonoBehaviour
         OnDelivery?.Invoke();
         sandwich.Clear();
 
-        score += 50;
-        OnScoreChange?.Invoke(score);
+        Score += 50;
+        Total++;
+        OnScoreChange?.Invoke(Score);
     }
 
     public void ReceiveOrder(RecipesSO order)

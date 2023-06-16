@@ -13,6 +13,10 @@ public class Client : MonoBehaviour
 
     public static event Action OnBackHome;
 
+    void Awake()
+    {
+    }
+
     void OnEnable()
     {
         GameManager.OnDelivery += PlayExit;
@@ -21,7 +25,11 @@ public class Client : MonoBehaviour
 
     void OnDisable() => GameManager.OnDelivery -= PlayExit;
 
-    void OnDestroy() => OnBackHome?.Invoke();
+    void OnDestroy()
+    {
+        if(!this.gameObject.scene.isLoaded) return;
+        OnBackHome?.Invoke();
+    }
 
     private void PlayExit()
     {
@@ -36,5 +44,5 @@ public class Client : MonoBehaviour
         GameManager.Instance.ReceiveOrder(order);
     }
 
-    public void GoHome() => DestroyImmediate(gameObject);
+    public void GoHome() => Destroy(gameObject);
 }
