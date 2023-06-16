@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public static event Action OnClearTable;
+    public static event Action OnDelivery;
+    public static event Action<int> OnScoreChange;
     [field: SerializeField] public Transform SpawnPoint { get; private set; }
+    [field: SerializeField] public int score { get; private set; }
     [SerializeField] Timer gameTimer;
     [SerializeField] RecipesSO recipe;
     [SerializeField] IngredientsPreview previewScreen;
@@ -35,6 +38,15 @@ public class GameManager : MonoBehaviour
         sandwich.Clear();
     }
 
-    [ContextMenu("Test Compare")]
-    void TestCompare() => Debug.Log(recipe.Compere(sandwich));
+    public void DeliverySandwich()
+    {
+        if (!recipe.Compere(sandwich))
+            return;
+
+        OnDelivery?.Invoke();
+        sandwich.Clear();
+
+        score += 50;
+        OnScoreChange?.Invoke(score);
+    }
 }

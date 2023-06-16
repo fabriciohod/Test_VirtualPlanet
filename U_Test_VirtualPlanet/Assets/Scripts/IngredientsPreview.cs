@@ -5,9 +5,6 @@ public class IngredientsPreview : MonoBehaviour
 {
     [SerializeField] RectTransform iconsPanel;
     [SerializeField] Icon iconPrefab;
-    void OnEnable() => GameManager.OnClearTable += ClearRecipe;
-
-    void OnDisable() => GameManager.OnClearTable -= ClearRecipe;
 
     public void ShowRecipe(RecipesSO so)
     {

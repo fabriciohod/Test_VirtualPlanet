@@ -8,9 +8,17 @@ public class Ingredient : MonoBehaviour
     [field: SerializeField] public Sprite icon { get; private set; }
     [SerializeField] Rigidbody physics;
 
-    void OnEnable() => GameManager.OnClearTable += FlayAway;
+    void OnEnable()
+    {
+        GameManager.OnClearTable += FlayAway;
+        GameManager.OnDelivery += Delivery;
+    }
 
-    void OnDisable() => GameManager.OnClearTable -= FlayAway;
+    void OnDisable()
+    {
+        GameManager.OnClearTable -= FlayAway;
+        GameManager.OnDelivery -= Delivery;
+    }
 
 
     IEnumerator Start()
@@ -24,7 +32,12 @@ public class Ingredient : MonoBehaviour
 
     public void FlayAway()
     {
-        physics.AddExplosionForce(5f, Vector3.forward * 4, 20f, 10f, ForceMode.Impulse);
+        physics.AddExplosionForce(5f, Vector3.up * 4, 20f, 10f, ForceMode.Impulse);
+        transform.DOScale(Vector3.zero, .6f).SetEase(Ease.OutBounce).OnComplete(() => DestroyImmediate(gameObject));
+    }
+    public void Delivery()
+    {
+        physics.AddExplosionForce(5f, Vector3.back * 4, 20f, 10f, ForceMode.Impulse);
         transform.DOScale(Vector3.zero, .6f).SetEase(Ease.OutBounce).OnComplete(() => DestroyImmediate(gameObject));
     }
 
