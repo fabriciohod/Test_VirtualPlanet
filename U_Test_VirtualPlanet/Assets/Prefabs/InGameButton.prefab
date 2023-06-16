@@ -441,6 +441,18 @@ MonoBehaviour:
   OnClicked:
     m_PersistentCalls:
       m_Calls: []
+  cooldown:
+    durationInSecs: 0.4
+    countDown: 0
+    OnTimerTick:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTimerTick01:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTimerEnded:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &3658986434202054534
 GameObject:
   m_ObjectHideFlags: 0
