@@ -7,18 +7,19 @@ public class Client : MonoBehaviour
 {
     [SerializeField] PlayableDirector director;
     [SerializeField] PlayableAsset exitTimeline;
+    [SerializeField] PlayableAsset enterTimeline;
     [SerializeField] RecipesSO[] orders;
     [SerializeField] Material[] variations;
     [SerializeField] SkinnedMeshRenderer meshRenderer;
 
     public static event Action OnBackHome;
 
-    void Awake()
-    {
-    }
 
     void OnEnable()
     {
+        director.playableAsset = enterTimeline;
+        director.Play();       
+
         GameManager.OnDelivery += PlayExit;
         meshRenderer.material = variations[Random.Range(0, 4)];
     }

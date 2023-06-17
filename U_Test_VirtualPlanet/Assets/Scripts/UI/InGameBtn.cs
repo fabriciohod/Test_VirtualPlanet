@@ -17,10 +17,15 @@ public class InGameBtn : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(!canClickAgain)
+        return;
+
         btn.DOLocalMoveY(.3f, .1f).SetEase(Ease.InCubic);
         OnClicked?.Invoke();
+
         canClickAgain = false;
         cooldown.StartTimer(() => canClickAgain = true);
+
         btn.DOLocalMoveY(.5f, .1f).SetEase(Ease.OutCubic).SetDelay(.35f);
     }
 }

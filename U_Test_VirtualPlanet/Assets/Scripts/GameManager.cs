@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
+        NextClient();
         yield return new WaitForSeconds(2f);
 
         gameTimer.StartTimer();
